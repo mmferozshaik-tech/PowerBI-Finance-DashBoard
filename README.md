@@ -50,12 +50,13 @@ The **Finance Overview** page provides a high-level summary of financial perform
 
 ### Key Performance Indicators
 
-* Total Sales
-* Total Profit
+* Total Revenue
+* EBIT(Profit)
 * Total Records
+* EBIT Margin %
 * Gross Sales
 * Units Sold
-* Profit Margin %
+* Operation Working Capital
 
 ### Visualizations
 
@@ -107,17 +108,17 @@ This page provides detailed analysis of **product and country performance**.
 
 # 📐 DAX Measures
 
-### Total Sales
+### Total Revenue
 
 ```DAX
-Total Sales =
+Total Revenue =
 SUM(Finance[Sales])
 ```
 
 ### Total Profit
 
 ```DAX
-Total Profit =
+EBIT =
 SUM(Finance[Profit])
 ```
 
@@ -135,13 +136,13 @@ Total Units Sold =
 SUM(Finance[Units Sold])
 ```
 
-### Profit Margin
+### EBIT Margin
 
 ```DAX
-Profit Margin % =
+EBIT Margin % =
 DIVIDE(
-    [Total Profit],
-    [Total Sales],
+    [EBIT],
+    [Total Revenue],
     0
 )
 ```
@@ -151,6 +152,18 @@ Selected Country =
 SELECTEDVALUE(Finance[Country], "All Countries")
 )
 ```
+
+### Operating Working Capital
+Operating Working Capital = 
+VAR _AR = [Accounts Receivable]
+VAR _InvDays = 45
+VAR _PayableDays = 30
+
+VAR _Inventory = DIVIDE([Total COGS], 365, 0) * _InvDays
+VAR _AP = DIVIDE([Total COGS], 365, 0) * _PayableDays
+
+RETURN
+(_AR + _Inventory) - _AP
 
 # 🔄 Power BI Features Used
 
@@ -239,7 +252,11 @@ Add your screenshot here:
 ```markdown
 <img width="1319" height="727" alt="Product Country_Analysis" src="https://github.com/user-attachments/assets/a8f2cd11-f078-4702-9c9b-7cf799a8c142" />
 ```
+### Finance Metrics
 
+```markdown
+<img width="1319" height="727" alt="Product Country_Analysis" src="https://github.com/user-attachments/assets/a8f2cd11-f078-4702-9c9b-7cf799a8c142" />
+```
 ---
 
 
